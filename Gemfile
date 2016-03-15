@@ -15,4 +15,6 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  
+  gem 'activerecord-import', git: "https://github.com/zdennis/activerecord-import.git"
 end
