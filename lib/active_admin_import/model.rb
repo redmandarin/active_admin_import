@@ -17,7 +17,7 @@ module ActiveAdminImport
     validate :file_contents_present, if: ->(me) { me.file.present? }
 
     # before_validation :unzip_file, if: ->(me) { me.archive? && me.allow_archive? }
-    before_validation :encode_file, if: ->(me) { me.force_encoding? && me.file.present? }
+    # before_validation :encode_file, if: ->(me) { me.force_encoding? && me.file.present? }
 
     attr_reader :attributes
 
@@ -88,14 +88,14 @@ module ActiveAdminImport
       end
     end
 
-    def unzip_file
-      Zip::File.open(file_path) do |zip_file|
-        self.file = Tempfile.new('active-admin-import-unzipped')
-        data = zip_file.entries.select { |f| f.file? }.first.get_input_stream.read
-        self.file << data
-        self.file.close
-      end
-    end
+    # def unzip_file
+    #   Zip::File.open(file_path) do |zip_file|
+    #     self.file = Tempfile.new('active-admin-import-unzipped')
+    #     data = zip_file.entries.select { |f| f.file? }.first.get_input_stream.read
+    #     self.file << data
+    #     self.file.close
+    #   end
+    # end
 
     def csv_allowed_types
       [
